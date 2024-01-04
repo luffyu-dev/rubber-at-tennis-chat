@@ -1,6 +1,7 @@
 package com.rubber.at.tennis.chat.service.controller;
 
 import com.rubber.at.tennis.chat.api.AiTennisChatGptApi;
+import com.rubber.at.tennis.chat.api.dto.message.MsgChatReq;
 import com.rubber.at.tennis.chat.api.dto.message.SendMessageReq;
 import com.rubber.at.tennis.chat.api.dto.runs.ChatRunsReq;
 import com.rubber.at.tennis.chat.api.dto.thread.ThreadChatReq;
@@ -34,6 +35,18 @@ public class AiTennisChatGptController {
     @NeedLogin(request = false)
     public ResultMsg queryChatMessageList(@RequestBody ThreadChatReq req){
         return ResultMsg.success(aiTennisChatGptApi.queryChatMessageList(req));
+    }
+
+
+    /**
+     * 查询消息列表
+     * @param req
+     * @return
+     */
+    @PostMapping("/one/message")
+    @NeedLogin(request = false)
+    public ResultMsg oneChatMessageList(@RequestBody MsgChatReq req){
+        return ResultMsg.success(aiTennisChatGptApi.querySingleMsg(req));
     }
 
 

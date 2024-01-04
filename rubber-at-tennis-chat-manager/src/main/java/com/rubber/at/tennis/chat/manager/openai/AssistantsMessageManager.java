@@ -129,6 +129,48 @@ public class AssistantsMessageManager {
 
 
     /**
+     *
+     * @param configDto
+     * @param treadId
+     * @param msgId
+     * @return
+     * {
+     *     "id": "msg_L0WJ2QBIdUsUqyl5wxNQ9Wmx",
+     *     "object": "thread.message",
+     *     "created_at": 1704377387,
+     *     "thread_id": "thread_D7sqy2dt6eZUC0MkmqUu50zD",
+     *     "role": "assistant",
+     *     "content": [
+     *         {
+     *             "type": "text",
+     *             "text": {
+     *                 "value": "很抱歉，看来我之前提到的“GOTA”在网球领域中并没有固定的定义。可能这个词语在网球术语中并不常见，或者它可能代表的是某个特定的人、地点或事件，而这些信息目前并不在我的范围内。\n\n如果你可以提供更多上下文、特定术语或其他信息，我将竭诚为你提供更准确的信息。希望我能为你提供更多帮助！",
+     *                 "annotations": []
+     *             }
+     *         }
+     *     ],
+     *     "file_ids": [],
+     *     "assistant_id": "asst_WhFAtHUc3gahhsHBPHRnXBxR",
+     *     "run_id": "run_MybJhM8ny4pZOvwiUZSjwMMo",
+     *     "metadata": {}
+     * }
+     */
+    public static ChatMessageDto queryOneMessage(OpenAiConfigDto configDto, String treadId,String msgId){
+        String url = OpenAiConstant.BASE_URL + "/v1/threads/"+treadId+"/messages/"+msgId;
+        JSONObject body = new JSONObject();
+
+        String value = HttpProxyUtils.get(
+                url,
+                configDto.initHeader(),
+                body,
+                OpenAiConstant.DEFAULT_TIMEOUT);
+
+        JSONObject js = JSON.parseObject(value);
+        return resolveMsg(js);
+    }
+
+
+    /**
      * 创建信息
      * @param obj
      * @return

@@ -5,9 +5,11 @@ import com.rubber.at.tennis.chat.api.AiTennisChatGptApi;
 import com.rubber.at.tennis.chat.api.dto.BaseChatReq;
 import com.rubber.at.tennis.chat.api.dto.message.ChatMessageDto;
 import com.rubber.at.tennis.chat.api.dto.message.ChatThreadMsgModel;
+import com.rubber.at.tennis.chat.api.dto.message.MsgChatReq;
 import com.rubber.at.tennis.chat.api.dto.message.SendMessageReq;
 import com.rubber.at.tennis.chat.api.dto.runs.ChatRunsDto;
 import com.rubber.at.tennis.chat.api.dto.runs.ChatRunsReq;
+import com.rubber.at.tennis.chat.api.dto.runs.ChatRunsStatusDto;
 import com.rubber.at.tennis.chat.api.dto.thread.ChatThreadDto;
 import com.rubber.at.tennis.chat.api.dto.thread.ThreadChatReq;
 import com.rubber.at.tennis.chat.manager.dto.OpenAiConfigDto;
@@ -61,6 +63,21 @@ public class AiTennisChatGpsService implements AiTennisChatGptApi {
     }
 
     /**
+     * 查询单条消息
+     *
+     * @param req
+     * @return
+     */
+    @Override
+    public ChatMessageDto querySingleMsg(MsgChatReq req) {
+        if (StrUtil.isEmpty(req.getThreadId()) || StrUtil.isEmpty(req.getMsgId())){
+            return new ChatMessageDto();
+        }
+        OpenAiConfigDto configDto = aiTennisConfigComponent.initAndCreateConfig();
+        return AssistantsMessageManager.queryOneMessage(configDto,req.getThreadId(),req.getMsgId());
+    }
+
+    /**
      * 发送消息列表
      *
      * @param req
@@ -95,9 +112,9 @@ public class AiTennisChatGpsService implements AiTennisChatGptApi {
      * @return
      */
     @Override
-    public ChatRunsDto queryRunsStatus(ChatRunsReq req) {
+    public ChatRunsStatusDto queryRunsStatus(ChatRunsReq req) {
         if (StrUtil.isEmpty(req.getThreadId()) || StrUtil.isEmpty(req.getRunId())){
-            return new ChatRunsDto();
+            return new ChatRunsStatusDto();
         }
         OpenAiConfigDto configDto = aiTennisConfigComponent.initAndCreateConfig();
 

@@ -14,9 +14,9 @@ import java.util.Map;
 public class HttpProxyUtils {
 
 
-    private static final String PROXY_POST_URL = "http://38.55.107.245:38033/openai-api/proxy/post";
+    private static final String PROXY_POST_URL = "http://38.55.107.245:38000/openai-api/proxy/post";
 
-    private static final String PROXY_GET_URL = "http://38.55.107.245:38033/openai-api/proxy/get";
+    private static final String PROXY_GET_URL = "http://38.55.107.245:38000/openai-api/proxy/get";
 
 
     public static String post(String url, Map<String,String> header,JSONObject body,Integer timeOut){

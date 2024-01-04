@@ -22,7 +22,7 @@ public class OpenAiConfigDto {
     /**
      * openKey
      */
-    private  String openaiKey = "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";
+    private  String openaiKey = "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";
 
     /**
      * 助手id

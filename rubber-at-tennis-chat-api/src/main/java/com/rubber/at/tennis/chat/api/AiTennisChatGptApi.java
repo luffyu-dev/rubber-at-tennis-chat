@@ -3,8 +3,10 @@ package com.rubber.at.tennis.chat.api;
 import com.rubber.at.tennis.chat.api.dto.message.ChatMessageDto;
 import com.rubber.at.tennis.chat.api.dto.BaseChatReq;
 import com.rubber.at.tennis.chat.api.dto.message.ChatThreadMsgModel;
+import com.rubber.at.tennis.chat.api.dto.message.MsgChatReq;
 import com.rubber.at.tennis.chat.api.dto.message.SendMessageReq;
 import com.rubber.at.tennis.chat.api.dto.runs.ChatRunsReq;
+import com.rubber.at.tennis.chat.api.dto.runs.ChatRunsStatusDto;
 import com.rubber.at.tennis.chat.api.dto.thread.ThreadChatReq;
 import com.rubber.at.tennis.chat.api.dto.runs.ChatRunsDto;
 import com.rubber.at.tennis.chat.api.dto.thread.ChatThreadDto;
@@ -36,6 +38,12 @@ public interface AiTennisChatGptApi {
     ChatThreadMsgModel queryChatMessageList(ThreadChatReq req);
 
 
+    /**
+     * 查询单条消息
+     * @param req
+     * @return
+     */
+    ChatMessageDto querySingleMsg(MsgChatReq req);
 
     /**
      * 发送消息列表
@@ -50,7 +58,7 @@ public interface AiTennisChatGptApi {
      * @param req
      * @return
      */
-    ChatRunsDto queryRunsStatus(ChatRunsReq req);
+    ChatRunsStatusDto queryRunsStatus(ChatRunsReq req);
 
 
 }
