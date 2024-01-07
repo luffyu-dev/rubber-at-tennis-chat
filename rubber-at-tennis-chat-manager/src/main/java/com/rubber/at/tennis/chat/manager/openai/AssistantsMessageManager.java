@@ -58,6 +58,7 @@ public class AssistantsMessageManager {
                 configDto.initHeader(),
                 body,
                 OpenAiConstant.DEFAULT_TIMEOUT);
+        log.info("请求url={},value={}",url,value);
 
         JSONObject res = JSON.parseObject(value);
         return resolveMsg(res);
@@ -105,6 +106,9 @@ public class AssistantsMessageManager {
                 configDto.initHeader(),
                 body,
                 OpenAiConstant.DEFAULT_TIMEOUT);
+
+        log.info("请求url={},value={}",url,value);
+
 
         JSONObject js = JSON.parseObject(value);
 
@@ -164,6 +168,7 @@ public class AssistantsMessageManager {
                 configDto.initHeader(),
                 body,
                 OpenAiConstant.DEFAULT_TIMEOUT);
+        log.info("请求url={},value={}",url,value);
 
         JSONObject js = JSON.parseObject(value);
         return resolveMsg(js);

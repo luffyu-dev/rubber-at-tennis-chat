@@ -31,7 +31,7 @@ public class AssistantsThreadManager {
                 configDto.initHeader(),
                 body,
                 OpenAiConstant.DEFAULT_TIMEOUT);
-        log.info("创建线程 res={}",value);
+        log.info("请求url={},value={}",url,value);
         JSONObject re = JSONObject.parseObject(value);
         return re.getString("id");
     }

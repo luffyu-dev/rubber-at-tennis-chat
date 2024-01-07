@@ -1,6 +1,7 @@
 package com.rubber.at.tennis.chat.service.controller;
 
 import com.rubber.at.tennis.chat.api.AiTennisChatGptApi;
+import com.rubber.at.tennis.chat.api.dto.BaseChatReq;
 import com.rubber.at.tennis.chat.api.dto.message.MsgChatReq;
 import com.rubber.at.tennis.chat.api.dto.message.SendMessageReq;
 import com.rubber.at.tennis.chat.api.dto.runs.ChatRunsReq;
@@ -31,7 +32,19 @@ public class AiTennisChatGptController {
      * @param req
      * @return
      */
-    @PostMapping("/query/message")
+    @PostMapping("/query/thread")
+    @NeedLogin
+    public ResultMsg queryChatThreadList(@RequestBody BaseChatReq req){
+        return ResultMsg.success(aiTennisChatGptApi.queryAssistantsThreads(req));
+    }
+
+
+    /**
+     * 查询消息列表
+     * @param req
+     * @return
+     */
+    @PostMapping("/message/list")
     @NeedLogin(request = false)
     public ResultMsg queryChatMessageList(@RequestBody ThreadChatReq req){
         return ResultMsg.success(aiTennisChatGptApi.queryChatMessageList(req));
@@ -43,8 +56,8 @@ public class AiTennisChatGptController {
      * @param req
      * @return
      */
-    @PostMapping("/one/message")
-    @NeedLogin(request = false)
+    @PostMapping("/message/one")
+    @NeedLogin
     public ResultMsg oneChatMessageList(@RequestBody MsgChatReq req){
         return ResultMsg.success(aiTennisChatGptApi.querySingleMsg(req));
     }
@@ -56,8 +69,8 @@ public class AiTennisChatGptController {
      * @param req
      * @return
      */
-    @PostMapping("/send/message")
-    @NeedLogin(request = false)
+    @PostMapping("/message/send")
+    @NeedLogin
     public ResultMsg sendMessage(@RequestBody SendMessageReq req){
         return ResultMsg.success(aiTennisChatGptApi.sendMessage(req));
     }
@@ -68,8 +81,8 @@ public class AiTennisChatGptController {
      * @param req
      * @return
      */
-    @PostMapping("/query/status")
-    @NeedLogin(request = false)
+    @PostMapping("/message/status")
+    @NeedLogin
     public ResultMsg queryRunsStatus(@RequestBody ChatRunsReq req){
         return ResultMsg.success(aiTennisChatGptApi.queryRunsStatus(req));
     }

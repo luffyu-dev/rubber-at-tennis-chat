@@ -17,7 +17,7 @@ public class ChatThreadDto {
     /**
      * 线程名称
      */
-    private String threadName;
+    private String chatName;
 
 
 }
