@@ -31,8 +31,9 @@ public class UserChatThreadDalImpl extends BaseAdminService<UserChatThreadMapper
             return new ArrayList<>();
         }
         LambdaQueryWrapper<UserChatThreadEntity> lqw = new LambdaQueryWrapper<>();
-        lqw.eq(UserChatThreadEntity::getUid,uid);
-        lqw.orderByDesc(UserChatThreadEntity::getUpdateTime);
+        lqw.eq(UserChatThreadEntity::getUid,uid)
+                .eq(UserChatThreadEntity::getStatus,10)
+                .orderByDesc(UserChatThreadEntity::getUpdateTime);
         return list(lqw);
     }
 
@@ -45,6 +46,7 @@ public class UserChatThreadDalImpl extends BaseAdminService<UserChatThreadMapper
     public UserChatThreadEntity getByThreadId(Integer uid, String threadId) {
         LambdaQueryWrapper<UserChatThreadEntity> lqw = new LambdaQueryWrapper<>();
         lqw.eq(UserChatThreadEntity::getUid,uid)
+                .eq(UserChatThreadEntity::getStatus,10)
                 .eq(UserChatThreadEntity::getThreadId,threadId);
         return getOne(lqw);
     }

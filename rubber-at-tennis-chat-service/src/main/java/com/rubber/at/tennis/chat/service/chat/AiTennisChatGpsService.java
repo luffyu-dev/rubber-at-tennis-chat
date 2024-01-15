@@ -26,6 +26,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,6 +67,23 @@ public class AiTennisChatGpsService implements AiTennisChatGptApi {
             BeanUtils.copyProperties(i,dto);
             return dto;
         }).collect(Collectors.toList());
+    }
+
+    /**
+     * 删除线程
+     *
+     * @param req
+     */
+    @Override
+    public void removeChatThreads(ThreadChatReq req) {
+        if (StrUtil.isEmpty(req.getThreadId())){
+            return ;
+        }
+        UserChatThreadEntity chatThreadEntity = iUserChatThreadDal.getByThreadId(req.getUid(), req.getThreadId());
+        if (chatThreadEntity != null){
+            chatThreadEntity.setStatus(0);
+            iUserChatThreadDal.updateById(chatThreadEntity);
+        }
     }
 
     /**
@@ -156,6 +174,9 @@ public class AiTennisChatGpsService implements AiTennisChatGptApi {
      */
     private String doCreateNewChat(OpenAiConfigDto configDto,SendMessageReq req){
         String treadId = AssistantsThreadManager.createChatThread(configDto);
+        if (StringUtils.isEmpty(treadId)){
+            throw new RubberServiceException(SysCode.PARAM_ERROR);
+        }
         UserChatThreadEntity userChatThreadEntity = new UserChatThreadEntity();
         userChatThreadEntity.setUid(req.getUid());
         userChatThreadEntity.setThreadId(treadId);
@@ -174,7 +195,7 @@ public class AiTennisChatGpsService implements AiTennisChatGptApi {
 
 
     private void doUpdateUserChat(SendMessageReq req){
-        UserChatThreadEntity chatThreadEntity = iUserChatThreadDal.getByThreadId(req.getUid(), req.getMessage());
+        UserChatThreadEntity chatThreadEntity = iUserChatThreadDal.getByThreadId(req.getUid(), req.getThreadId());
         if (chatThreadEntity == null){
             throw new RubberServiceException(SysCode.PARAM_ERROR);
         }

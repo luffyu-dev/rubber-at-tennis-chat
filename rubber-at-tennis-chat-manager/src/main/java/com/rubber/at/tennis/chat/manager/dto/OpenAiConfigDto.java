@@ -17,17 +17,17 @@ public class OpenAiConfigDto {
     /**
      * assToken
      */
-    private  String openaiBeta = "assistants=v1";
+    private  String openaiBeta;
 
     /**
      * openKey
      */
-    private  String openaiKey = "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";
+    private  String openaiKey ;
 
     /**
      * 助手id
      */
-    private String assistantId = "asst_WhFAtHUc3gahhsHBPHRnXBxR";
+    private String assistantId;
 
 
 

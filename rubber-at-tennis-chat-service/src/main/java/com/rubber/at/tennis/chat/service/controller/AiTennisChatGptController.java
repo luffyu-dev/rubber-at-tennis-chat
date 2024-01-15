@@ -32,10 +32,29 @@ public class AiTennisChatGptController {
      * @param req
      * @return
      */
-    @PostMapping("/query/thread")
-    @NeedLogin
+    @PostMapping("/thread/list")
+    @NeedLogin(request = false)
     public ResultMsg queryChatThreadList(@RequestBody BaseChatReq req){
+        if (req.getUid() == null){
+            return ResultMsg.success();
+        }
         return ResultMsg.success(aiTennisChatGptApi.queryAssistantsThreads(req));
+    }
+
+
+    /**
+     * 查询消息列表
+     * @param req
+     * @return
+     */
+    @PostMapping("/thread/remove")
+    @NeedLogin
+    public ResultMsg removeChatThreadList(@RequestBody ThreadChatReq req){
+        if (req.getUid() == null){
+            return ResultMsg.success();
+        }
+        aiTennisChatGptApi.removeChatThreads(req);
+        return ResultMsg.success();
     }
 
 

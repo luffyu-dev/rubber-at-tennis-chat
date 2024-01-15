@@ -29,6 +29,12 @@ public interface AiTennisChatGptApi {
     List<ChatThreadDto> queryAssistantsThreads(BaseChatReq chatReq);
 
 
+    /**
+     * 删除线程
+     * @param req
+     */
+    void removeChatThreads(ThreadChatReq req);
+
 
     /**
      * 查询消息列表
