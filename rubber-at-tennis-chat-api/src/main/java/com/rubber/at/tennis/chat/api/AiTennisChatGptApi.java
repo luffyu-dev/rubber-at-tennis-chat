@@ -1,5 +1,6 @@
 package com.rubber.at.tennis.chat.api;
 
+import com.rubber.at.tennis.chat.api.dto.UserChatLimitDto;
 import com.rubber.at.tennis.chat.api.dto.message.ChatMessageDto;
 import com.rubber.at.tennis.chat.api.dto.BaseChatReq;
 import com.rubber.at.tennis.chat.api.dto.message.ChatThreadMsgModel;
@@ -10,6 +11,7 @@ import com.rubber.at.tennis.chat.api.dto.runs.ChatRunsStatusDto;
 import com.rubber.at.tennis.chat.api.dto.thread.ThreadChatReq;
 import com.rubber.at.tennis.chat.api.dto.runs.ChatRunsDto;
 import com.rubber.at.tennis.chat.api.dto.thread.ChatThreadDto;
+import com.rubber.base.components.util.session.BaseUserSession;
 
 import java.util.List;
 
@@ -20,6 +22,11 @@ import java.util.List;
 public interface AiTennisChatGptApi {
 
 
+
+    UserChatLimitDto queryUserLimit(BaseUserSession userSession);
+
+
+    void  addUserLimit(BaseUserSession userSession);
 
     /**
      * 查询线程list

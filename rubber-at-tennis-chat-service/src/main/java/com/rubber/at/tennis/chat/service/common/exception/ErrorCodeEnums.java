@@ -30,6 +30,7 @@ public enum  ErrorCodeEnums implements ICodeHandle {
     /**
      * 3-10-**-** 表示用户的行为错误
      */
+    SEND_MSG_LIMITED("310001", "没有聊天次数"),
 
 
     ;
